@@ -5,7 +5,7 @@ package main
 import (
 	"fmt"
 
-	lib "github.com/eehsiao/go-models-lib"
+	model "github.com/eehsiao/go-models"
 	redis "github.com/eehsiao/go-models-redis"
 )
 
@@ -34,7 +34,7 @@ func main() {
 		SelectPriv: "Y",
 	}
 
-	if serialStr, err = lib.Serialize(user); err == nil {
+	if serialStr, err = model.Serialize(user); err == nil {
 		redKey = user.Host + user.User
 		// HSet is github.com/go-redis/redis original command
 		if redBool, err = redUserModel.HSet("user", redKey, serialStr).Result(); err != nil {
