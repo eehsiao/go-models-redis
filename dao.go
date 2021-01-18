@@ -63,11 +63,30 @@ func (dao *Dao) OpenDB() *Dao {
 	return dao
 }
 
+// OpenDBnRet : connect to db
+func (dao *Dao) OpenDBnRet() *Dao, error {
+	if _, err := openDB(); err != nil {
+		return nil, err
+	}
+	dao.Client = db
+	dao.DbNnum = getConfig().DB
+
+	return dao, nil
+}
+
 // OpenDBWithPoolConns : connect to db and set pool conns
 func (dao *Dao) OpenDBWithPoolConns(active, idle int) *Dao {
 	if _, err := openDBWithPoolConns(active, idle); err != nil {
 		panic("cannot connect to db")
 	}
 	return dao
+}
+
+// OpenDBWithPoolConns : connect to db and set pool conns
+func (dao *Dao) OpenDBWithPoolConnsnRet(active, idle int) *Dao, error {
+	if _, err := openDBWithPoolConns(active, idle); err != nil {
+		return nil, err
+	}
+	return dao, nil
 
 }
