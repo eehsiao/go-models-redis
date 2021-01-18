@@ -64,14 +64,14 @@ func (dao *Dao) OpenDB() *Dao {
 }
 
 // OpenDBnRet : connect to db
-func (dao *Dao) OpenDBnRet() *Dao, error {
+func (dao *Dao) OpenDBnRet() error {
 	if _, err := openDB(); err != nil {
-		return nil, err
+		return err
 	}
 	dao.Client = db
 	dao.DbNnum = getConfig().DB
 
-	return dao, nil
+	return nil
 }
 
 // OpenDBWithPoolConns : connect to db and set pool conns
@@ -83,10 +83,10 @@ func (dao *Dao) OpenDBWithPoolConns(active, idle int) *Dao {
 }
 
 // OpenDBWithPoolConns : connect to db and set pool conns
-func (dao *Dao) OpenDBWithPoolConnsnRet(active, idle int) *Dao, error {
+func (dao *Dao) OpenDBWithPoolConnsnRet(active, idle int) error {
 	if _, err := openDBWithPoolConns(active, idle); err != nil {
-		return nil, err
+		return err
 	}
-	return dao, nil
+	return nil
 
 }
